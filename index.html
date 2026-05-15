@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Aryan Narwani — Software Engineer &amp; Data Scientist</title>
+
+<!-- FAVICON: AN monogram on black -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23000'/%3E%3Ctext x='32' y='44' font-family='Syne,Arial,sans-serif' font-size='30' font-weight='800' fill='%2300d4ff' text-anchor='middle' letter-spacing='-1'%3EAN%3C/text%3E%3C/svg%3E"/>
+<link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23000'/%3E%3Ctext x='32' y='44' font-family='Syne,Arial,sans-serif' font-size='30' font-weight='800' fill='%2300d4ff' text-anchor='middle' letter-spacing='-1'%3EAN%3C/text%3E%3C/svg%3E"/>
+
+<!-- FONTS -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+
+<!-- LIBRARIES -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+
+<!-- STYLES -->
+<link rel="stylesheet" href="css/base.css"/>
+<link rel="stylesheet" href="css/preloader.css"/>
+<link rel="stylesheet" href="css/nav.css"/>
+<link rel="stylesheet" href="css/hero.css"/>
+<link rel="stylesheet" href="css/sections.css"/>
+<link rel="stylesheet" href="css/about.css"/>
+<link rel="stylesheet" href="css/skills.css"/>
+<link rel="stylesheet" href="css/projects.css"/>
+<link rel="stylesheet" href="css/experience.css"/>
+<link rel="stylesheet" href="css/focus.css"/>
+<link rel="stylesheet" href="css/contact.css"/>
+<link rel="stylesheet" href="css/footer.css"/>
+<link rel="stylesheet" href="css/responsive.css"/>
+</head>
+<body>
+
+<!-- Safety: ensure preloader always hides even on JS errors -->
+<script>
+(function () {
+  function forceHide() {
+    var el  = document.getElementById('preloader');
+    var bar = document.querySelector('.preloader-bar');
+    if (!el) return;
+    el.style.transition = 'transform .8s cubic-bezier(.65,0,.35,1), opacity .5s';
+    el.style.transform  = 'translateY(-100%)';
+    el.style.opacity    = '0';
+    if (bar) bar.style.opacity = '0';
+    setTimeout(function () { if (el) el.style.display = 'none'; }, 800);
+  }
+  window.__forceHidePreloader = forceHide;
+  window.__failsafeTimer = setTimeout(forceHide, 5000);
+  window.addEventListener('error', forceHide);
+}());
+</script>
+
+<!-- ═══ PRELOADER ═══ -->
+<div id="preloader">
+  <div class="preloader-text">
+    <span>Initializing</span>
+    <span class="preloader-count">0%</span>
+  </div>
+</div>
+<div class="preloader-bar"></div>
+
+<!-- ═══ SECTION TITLE TRANSITION OVERLAY ═══ -->
+<div id="section-overlay">
+  <div id="section-overlay-line"></div>
+  <div id="section-overlay-title"></div>
+  <div id="section-overlay-label"></div>
+  <div id="section-overlay-counter"></div>
+</div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav id="mainNav">
+  <a href="#hero" class="nav-logo">
+    <span class="nav-logo-bracket">&lt;</span>
+    <span class="nav-logo-slash">/</span>
+    <span class="nav-logo-name">AN</span>
+    <span class="nav-logo-bracket">&gt;</span>
+    <span class="nav-logo-cursor"></span>
+  </a>
+
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#skills">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <a href="#contact" class="nav-cta">Get in touch</a>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <!-- Photo as right 75% background with strong fade -->
+  <div class="hero-photo-bg">
+    <img src="assets/aryan.png" alt="Aryan Narwani"/>
+  </div>
+
+  <canvas class="hero-canvas" id="particleCanvas"></canvas>
+  <div class="hero-grid"></div>
+
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-tag">
+        <span class="hero-tag-pulse"></span>
+        Software Engineer · Data Scientist
+      </div>
+
+      <h1 class="hero-name">
+        <span class="row">
+          <span class="row-inner">Aryan</span>
+          <span class="row-mask"></span>
+        </span>
+        <span class="row">
+          <span class="row-inner outline">Narwani.</span>
+          <span class="row-mask"></span>
+        </span>
+      </h1>
+
+      <div class="hero-meta">
+        <div class="hero-meta-block">
+          <span class="hero-meta-label">Based in</span>
+          <span class="hero-meta-val">Madrid, Spain</span>
+        </div>
+        <div class="hero-meta-block">
+          <span class="hero-meta-label">Focus</span>
+          <span class="hero-meta-val">ML · MLOps · Backend</span>
+        </div>
+        <div class="hero-meta-block">
+          <span class="hero-meta-label">Status</span>
+          <span class="hero-meta-val" style="color:#00ffb3;">● Available</span>
+        </div>
+      </div>
+
+      <p class="hero-desc">
+        I build intelligent systems at the intersection of machine learning, backend engineering, and data — from satellite AI platforms to production APIs.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">
+          <span>View Projects</span>
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contact" class="btn-outline">Contact</a>
+        <a href="#" class="btn-outline">Download CV</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <span class="hero-scroll-text">Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══ MARQUEE ═══ -->
+<div class="marquee-container">
+  <div class="marquee-track" id="marqueeTrack">
+    <span class="marquee-item">Machine Learning</span>
+    <span class="marquee-item">MLOps</span>
+    <span class="marquee-item">FastAPI</span>
+    <span class="marquee-item">React</span>
+    <span class="marquee-item">Node.js</span>
+    <span class="marquee-item">Python</span>
+    <span class="marquee-item">Docker</span>
+    <span class="marquee-item">Spark</span>
+    <span class="marquee-item">Kafka</span>
+    <span class="marquee-item">PostgreSQL</span>
+    <span class="marquee-item">MongoDB</span>
+    <span class="marquee-item">Neo4j</span>
+    <span class="marquee-item">Redis</span>
+    <span class="marquee-item">MLflow</span>
+    <span class="marquee-item">PostGIS</span>
+    <span class="marquee-item">PyTorch</span>
+    <span class="marquee-item">Prophet</span>
+    <span class="marquee-item">Big Data</span>
+    <!-- duplicate for seamless loop -->
+    <span class="marquee-item">Machine Learning</span>
+    <span class="marquee-item">MLOps</span>
+    <span class="marquee-item">FastAPI</span>
+    <span class="marquee-item">React</span>
+    <span class="marquee-item">Node.js</span>
+    <span class="marquee-item">Python</span>
+    <span class="marquee-item">Docker</span>
+    <span class="marquee-item">Spark</span>
+    <span class="marquee-item">Kafka</span>
+    <span class="marquee-item">PostgreSQL</span>
+    <span class="marquee-item">MongoDB</span>
+    <span class="marquee-item">Neo4j</span>
+    <span class="marquee-item">Redis</span>
+    <span class="marquee-item">MLflow</span>
+    <span class="marquee-item">PostGIS</span>
+    <span class="marquee-item">PyTorch</span>
+    <span class="marquee-item">Prophet</span>
+    <span class="marquee-item">Big Data</span>
+  </div>
+</div>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="section-inner">
+    <div class="section-label" data-anim="fade">01 — About me</div>
+    <div class="about-grid">
+      <div>
+        <div class="about-intro" data-anim="fade">
+          I'm a software engineer and data scientist who builds things that <em>actually work</em> — from satellite imagery pipelines to backend APIs, from ML models to production systems.
+        </div>
+        <div class="about-body" data-anim="fade">
+          <p>I work across the full spectrum from raw data to deployed systems. I care deeply about code quality, clean architecture, and building things that solve real problems.</p>
+          <p>My work spans MLOps infrastructure, geospatial AI, web development, and data engineering. I don't specialize in one layer — I understand the whole stack, and I know how to move fast without cutting corners.</p>
+          <p>When I'm not building PIT 2026 (an MLOps platform for satellite change detection), I'm working on catering demand forecasting, backend APIs, or diving into social network analysis with graph databases.</p>
+        </div>
+      </div>
+
+      <div class="about-cards">
+        <div class="about-card" data-anim="slide">
+          <div class="about-card-num">01 / Builder mindset</div>
+          <div class="about-card-title">Ship, don't prototype</div>
+          <div class="about-card-text">I don't stop at proofs of concept. I architect clean systems, write tested code, and ship things teams can maintain and extend.</div>
+        </div>
+        <div class="about-card" data-anim="slide">
+          <div class="about-card-num">02 / Data-first</div>
+          <div class="about-card-title">Decisions grounded in data</div>
+          <div class="about-card-text">Every decision is grounded in data — whether engineering a model pipeline, designing a schema, or analyzing system performance.</div>
+        </div>
+        <div class="about-card" data-anim="slide">
+          <div class="about-card-num">03 / Full stack</div>
+          <div class="about-card-title">End-to-end capability</div>
+          <div class="about-card-text">From database design to ML model serving to frontend interfaces — I understand how the pieces connect, and I can own any layer.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SKILLS ═══ -->
+<section id="skills">
+  <div class="section-inner">
+    <div class="section-label" data-anim="fade">02 — Tech stack</div>
+    <h2 class="section-title" data-anim="title">What I <em>work</em><br/><span class="outline">with daily.</span></h2>
+
+    <div class="skills-grid">
+      <div class="skill-card" data-anim="card">
+        <div class="skill-card-head">
+          <div class="skill-card-icon"><svg viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+          <span class="skill-card-name">Frontend</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">React</span>
+          <span class="skill-tag">Next.js</span>
+          <span class="skill-tag">HTML / CSS</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">TypeScript</span>
+          <span class="skill-tag">Android (Kotlin)</span>
+          <span class="skill-tag">Tableau</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-anim="card">
+        <div class="skill-card-head">
+          <div class="skill-card-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <span class="skill-card-name">Backend</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">FastAPI</span>
+          <span class="skill-tag">Node.js</span>
+          <span class="skill-tag">Express</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">JWT</span>
+          <span class="skill-tag">Clean Architecture</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-anim="card">
+        <div class="skill-card-head">
+          <div class="skill-card-icon"><svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg></div>
+          <span class="skill-card-name">AI / ML / Data</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">scikit-learn</span>
+          <span class="skill-tag">Prophet</span>
+          <span class="skill-tag">U-Net (LEVIR)</span>
+          <span class="skill-tag">NetworkX</span>
+          <span class="skill-tag">Pandas</span>
+          <span class="skill-tag">NumPy</span>
+          <span class="skill-tag">Matplotlib</span>
+          <span class="skill-tag">Seaborn</span>
+          <span class="skill-tag">Plotly</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-anim="card">
+        <div class="skill-card-head">
+          <div class="skill-card-icon"><svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+          <span class="skill-card-name">Databases</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">PostgreSQL</span>
+          <span class="skill-tag">MySQL</span>
+          <span class="skill-tag">MongoDB</span>
+          <span class="skill-tag">Redis</span>
+          <span class="skill-tag">Cassandra</span>
+          <span class="skill-tag">Neo4j</span>
+          <span class="skill-tag">PostGIS</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-anim="card">
+        <div class="skill-card-head">
+          <div class="skill-card-icon"><svg viewBox="0 0 24 24"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+          <span class="skill-card-name">Cloud / MLOps</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">MLflow</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitHub Actions</span>
+          <span class="skill-tag">Cloudinary</span>
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">CI/CD</span>
+        </div>
+      </div>
+
+      <div class="skill-card" data-anim="card">
+        <div class="skill-card-head">
+          <div class="skill-card-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg></div>
+          <span class="skill-card-name">Languages &amp; Tools</span>
+        </div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">JavaScript</span>
+          <span class="skill-tag">Kotlin</span>
+          <span class="skill-tag">AL (Business Central)</span>
+          <span class="skill-tag">SQL</span>
+          <span class="skill-tag">Bash</span>
+          <span class="skill-tag">VS Code</span>
+          <span class="skill-tag">BDD / Behave</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PROJECTS ═══ -->
+<section id="projects">
+  <div class="section-inner">
+    <div class="projects-header">
+      <div>
+        <div class="section-label" data-anim="fade">03 — Selected work</div>
+        <h2 class="section-title" data-anim="title" style="margin-bottom:0;">Projects that<br/><em>ship.</em></h2>
+      </div>
+      <div class="projects-meta" data-anim="fade">
+        <span><strong>08</strong></span>
+        <span>selected projects</span>
+      </div>
+    </div>
+
+    <div class="projects-grid">
+
+      <div class="project-card featured span-2" data-anim="card">
+        <div class="project-num">001</div>
+        <div class="project-title">PIT 2026 — Plataforma de Inteligencia Territorial</div>
+        <div class="project-desc">A full MLOps platform for satellite imagery analysis using change detection. Serves a LEVIR-UNet model for geospatial intelligence. Built the complete FastAPI backend with detections and predictions routers, model serving integration with stub fallbacks, zone definitions matching the LEVIR dataset, and a real-time log panel frontend.</div>
+        <div class="project-tech">
+          <span class="project-tech-tag">FastAPI</span>
+          <span class="project-tech-tag">MLflow</span>
+          <span class="project-tech-tag">PostGIS</span>
+          <span class="project-tech-tag">Prophet</span>
+          <span class="project-tech-tag">U-Net</span>
+          <span class="project-tech-tag">HTML / JS</span>
+        </div>
+        <a href="#" class="project-link">View project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <div class="project-card" data-anim="card">
+        <div class="project-num">002</div>
+        <div class="project-title">Inflight Catering Demand Forecasting</div>
+        <div class="project-desc">Machine learning system to predict inflight catering demand using rule-based synthetic datasets augmented with real flight data. Regression, time-series analysis, and feature engineering to optimize catering supply chains.</div>
+        <div class="project-tech">
+          <span class="project-tech-tag">Python</span>
+          <span class="project-tech-tag">scikit-learn</span>
+          <span class="project-tech-tag">Pandas</span>
+          <span class="project-tech-tag">Feature Eng.</span>
+        </div>
+        <a href="#" class="project-link">View project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <div class="project-card" data-anim="card">
+        <div class="project-num">003</div>
+        <div class="project-title">Delivery Notes Backend API</div>
+        <div class="project-desc">Production-grade RESTful API for managing delivery notes built on Clean Architecture principles. JWT authentication, PDF generation, cloud media storage via Cloudinary, and complete CRUD operations.</div>
+        <div class="project-tech">
+          <span class="project-tech-tag">Node.js</span>
+          <span class="project-tech-tag">Express</span>
+          <span class="project-tech-tag">MySQL</span>
+          <span class="project-tech-tag">JWT</span>
+          <span class="project-tech-tag">Cloudinary</span>
+        </div>
+        <a href="#" class="project-link">View project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <div class="project-card" data-anim="card">
+        <div class="project-num">004</div>
+        <div class="project-title">Social Network Analysis</div>
+        <div class="project-desc">Graph-based analysis of social networks using NetworkX. Centrality metrics, community detection, influence propagation, and interactive visualizations revealing structural patterns in large datasets.</div>
+        <div class="project-tech">
+          <span class="project-tech-tag">Python</span>
+          <span class="project-tech-tag">NetworkX</span>
+          <span class="project-tech-tag">Neo4j</span>
+          <span class="project-tech-tag">Plotly</span>
+        </div>
+        <a href="#" class="project-link">View project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <div class="project-card" data-anim="card">
+        <div class="project-num">006</div>
+        <div class="project-title">American Airlines Data Viz</div>
+        <div class="project-desc">Comprehensive data visualization analysis of LAX departure data for American Airlines. Five distinct chart types built with Matplotlib, Plotly, and Seaborn — exploring delays, routes, and operational patterns.</div>
+        <div class="project-tech">
+          <span class="project-tech-tag">Python</span>
+          <span class="project-tech-tag">Matplotlib</span>
+          <span class="project-tech-tag">Plotly</span>
+          <span class="project-tech-tag">Seaborn</span>
+        </div>
+        <a href="#" class="project-link">View project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <div class="project-card" data-anim="card">
+        <div class="project-num">007</div>
+        <div class="project-title">Multi-DB Polyglot Architecture</div>
+        <div class="project-desc">Polyglot persistence systems combining Redis for caching, Cassandra for time-series, Neo4j for relationships, and MongoDB for documents — demonstrating when to use which database and why.</div>
+        <div class="project-tech">
+          <span class="project-tech-tag">Redis</span>
+          <span class="project-tech-tag">Cassandra</span>
+          <span class="project-tech-tag">Neo4j</span>
+          <span class="project-tech-tag">MongoDB</span>
+        </div>
+        <a href="#" class="project-link">View project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+      <div class="project-card" data-anim="card">
+        <div class="project-num">008</div>
+        <div class="project-title">RAG Assistant (LangChain)</div>
+        <div class="project-desc">Retrieval-Augmented Generation assistant using LangChain, ChromaDB vector store, and OpenAI embeddings. Resolved complex Windows/Python 3.12 dependency issues and environment configuration challenges.</div>
+        <div class="project-tech">
+          <span class="project-tech-tag">LangChain</span>
+          <span class="project-tech-tag">ChromaDB</span>
+          <span class="project-tech-tag">OpenAI</span>
+          <span class="project-tech-tag">Python</span>
+        </div>
+        <a href="#" class="project-link">View project <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section id="experience">
+  <div class="section-inner">
+    <div class="section-label" data-anim="fade">04 — Experience</div>
+    <h2 class="section-title" data-anim="title">The path<br/><em>so far.</em></h2>
+
+    <div class="timeline">
+      <div class="timeline-line">
+        <div class="timeline-line-fill" id="timelineLineFill"></div>
+      </div>
+
+      <!-- ─── EDUCATION START ─── -->
+      <div class="timeline-item" data-anim="timeline">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2014 — 2018</div>
+        <div class="timeline-title">IES Luther King · Madrid</div>
+        <div class="timeline-sub">Secondary education · Bachillerato</div>
+        <div class="timeline-desc">Foundation years in Madrid. Developed early interest in technology and computing. Strong academic base across sciences and humanities.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Madrid</span>
+          <span class="timeline-tag">Education</span>
+        </div>
+      </div>
+
+      <!-- Bridge connector between two Luther King stages -->
+      <div class="timeline-item timeline-item--bridge" data-anim="timeline">
+        <div class="timeline-dot timeline-dot--accent"></div>
+        <div class="timeline-date">2018 — 2019</div>
+        <div class="timeline-title">Lewisporte Collegiate · Canada</div>
+        <div class="timeline-sub">International exchange year · Newfoundland</div>
+        <div class="timeline-desc">Full academic year abroad in Canada. Immersive English-speaking environment, cross-cultural experience, and personal growth far from home. Strengthened independence and adaptability.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Canada</span>
+          <span class="timeline-tag">Exchange</span>
+          <span class="timeline-tag">International</span>
+        </div>
+      </div>
+
+      <div class="timeline-item" data-anim="timeline">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2019 — 2020</div>
+        <div class="timeline-title">IES Luther King · Madrid</div>
+        <div class="timeline-sub">Return · Bachillerato completion</div>
+        <div class="timeline-desc">Returned to Madrid to complete Bachillerato with renewed focus and international perspective. Graduated and set course toward technology and business.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Madrid</span>
+          <span class="timeline-tag">Graduated</span>
+        </div>
+      </div>
+
+      <!-- ─── WORK ─── -->
+      <div class="timeline-item" data-anim="timeline">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2020 — 2021</div>
+        <div class="timeline-title">Macy's Digital · Madrid</div>
+        <div class="timeline-sub">Digital operations · E-commerce</div>
+        <div class="timeline-desc">First professional experience in the digital industry. Worked within a fast-paced e-commerce environment, gaining exposure to digital operations, online retail processes, and international brand standards.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">E-commerce</span>
+          <span class="timeline-tag">Digital Ops</span>
+          <span class="timeline-tag">Retail</span>
+        </div>
+      </div>
+
+      <!-- ─── UNIVERSITY + PARALLEL ROLES ─── -->
+      <div class="timeline-item" data-anim="timeline">
+        <div class="timeline-dot timeline-dot--accent"></div>
+        <div class="timeline-date">2021 — 2025</div>
+        <div class="timeline-title">U-tad · Software Engineering Degree</div>
+        <div class="timeline-sub">Bachelor's · Madrid</div>
+        <div class="timeline-desc">Four-year software engineering degree covering full-stack development, data science, machine learning, databases, software architecture, and agile methodologies. Active involvement in applied projects throughout every year.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Software Engineering</span>
+          <span class="timeline-tag">Machine Learning</span>
+          <span class="timeline-tag">Web Dev</span>
+          <span class="timeline-tag">Madrid</span>
+        </div>
+      </div>
+
+      <div class="timeline-item timeline-item--parallel" data-anim="timeline">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2022 — 2023</div>
+        <div class="timeline-title">Project Manager · Client Projects</div>
+        <div class="timeline-sub">Freelance · While at U-tad</div>
+        <div class="timeline-desc">Managed end-to-end delivery of client projects in parallel with university studies. Coordinated cross-functional teams, defined deliverables, and maintained client communication from brief to launch.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Project Management</span>
+          <span class="timeline-tag">Agile</span>
+          <span class="timeline-tag">Client Delivery</span>
+        </div>
+      </div>
+
+      <div class="timeline-item timeline-item--parallel" data-anim="timeline">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2022 — 2024</div>
+        <div class="timeline-title">Nara · Startup Agency Founder</div>
+        <div class="timeline-sub">Co-founder · Digital agency</div>
+        <div class="timeline-desc">Co-founded Nara, a digital creative agency. Led strategy, client acquisition, and product delivery. Built and managed a team delivering web, branding, and digital solutions for early-stage startups and growing companies.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Founder</span>
+          <span class="timeline-tag">Strategy</span>
+          <span class="timeline-tag">Agency</span>
+          <span class="timeline-tag">Startups</span>
+        </div>
+      </div>
+
+      <div class="timeline-item timeline-item--parallel" data-anim="timeline">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2024 — 2025</div>
+        <div class="timeline-title">PIT 2026 · Lead Backend Engineer</div>
+        <div class="timeline-sub">Academic team project · U-tad</div>
+        <div class="timeline-desc">Architected and led backend development of PIT 2026, an MLOps platform for satellite imagery analysis. Built the FastAPI backend, designed model serving integration, prediction API routers, and geospatial zone management across a 5-person team.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">FastAPI</span>
+          <span class="timeline-tag">MLOps</span>
+          <span class="timeline-tag">Team Lead</span>
+        </div>
+      </div>
+
+      <div class="timeline-item timeline-item--parallel" data-anim="timeline">
+        <div class="timeline-dot"></div>
+        <div class="timeline-date">2024 — 2025</div>
+        <div class="timeline-title">Arbentia · Business Central Developer</div>
+        <div class="timeline-sub">AL Development · Microsoft ecosystem</div>
+        <div class="timeline-desc">Developed extensions for Microsoft Dynamics 365 Business Central using AL language. Built fleet management and task management modules, working within enterprise ERP environments and Arbentia's HIT project methodology.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">AL</span>
+          <span class="timeline-tag">Business Central</span>
+          <span class="timeline-tag">ERP</span>
+          <span class="timeline-tag">Arbentia</span>
+        </div>
+      </div>
+
+      <!-- ─── GRADUATION ─── -->
+      <div class="timeline-item" data-anim="timeline">
+        <div class="timeline-dot timeline-dot--glow"></div>
+        <div class="timeline-date">2025</div>
+        <div class="timeline-title">Software Engineering Degree · Graduated</div>
+        <div class="timeline-sub">U-tad · Madrid</div>
+        <div class="timeline-desc">Completed the Software Engineering Bachelor's degree at U-tad. Four years of building, shipping, and learning — from full-stack web to machine learning, from solo projects to team-led platforms. What's next is just beginning.</div>
+        <div class="timeline-tags">
+          <span class="timeline-tag">Graduated</span>
+          <span class="timeline-tag">2025</span>
+          <span class="timeline-tag">What's next →</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOCUS ═══ -->
+<section id="focus">
+  <div class="focus-bg-text">BUILD</div>
+  <div class="section-inner">
+    <div class="focus-grid">
+      <div class="focus-left">
+        <div class="section-label" data-anim="fade">05 — What I bring</div>
+        <h2 data-anim="title">Where I<br/><em>create value</em></h2>
+        <p data-anim="fade">I work across the full stack of modern software — from data pipelines to deployed models to user interfaces. Below are the areas where I can contribute from day one.</p>
+      </div>
+
+      <div class="focus-areas">
+        <div class="focus-area" data-anim="card">
+          <div class="focus-area-info">
+            <div class="focus-area-name">Data Science &amp; Analytics</div>
+            <div class="focus-area-desc">EDA · Feature engineering · Statistical modeling</div>
+          </div>
+          <svg class="focus-area-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="focus-area" data-anim="card">
+          <div class="focus-area-info">
+            <div class="focus-area-name">Machine Learning Engineering</div>
+            <div class="focus-area-desc">Model training · Evaluation · Deployment</div>
+          </div>
+          <svg class="focus-area-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="focus-area" data-anim="card">
+          <div class="focus-area-info">
+            <div class="focus-area-name">Backend API Development</div>
+            <div class="focus-area-desc">REST · Clean architecture · Auth · Databases</div>
+          </div>
+          <svg class="focus-area-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="focus-area" data-anim="card">
+          <div class="focus-area-info">
+            <div class="focus-area-name">MLOps &amp; Infrastructure</div>
+            <div class="focus-area-desc">MLflow · CI/CD · Model serving · Monitoring</div>
+          </div>
+          <svg class="focus-area-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="focus-area" data-anim="card">
+          <div class="focus-area-info">
+            <div class="focus-area-name">Big Data Engineering</div>
+            <div class="focus-area-desc">Spark · Kafka · HDFS · Distributed systems</div>
+          </div>
+          <svg class="focus-area-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+        <div class="focus-area" data-anim="card">
+          <div class="focus-area-info">
+            <div class="focus-area-name">Full-Stack Web Development</div>
+            <div class="focus-area-desc">React · Next.js · Node.js · REST APIs</div>
+          </div>
+          <svg class="focus-area-arrow" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="contact-bg-glow"></div>
+  <div class="section-inner">
+    <div class="contact-inner">
+      <div class="contact-left">
+        <div class="section-label" data-anim="fade">06 — Get in touch</div>
+        <h2 data-anim="title">Let's<br/>build<br/><em>something.</em></h2>
+        <p data-anim="fade">Whether it's a project, collaboration, internship, or just a conversation — I'm open. Reach out and let's talk.</p>
+
+        <div class="contact-links">
+          <a href="mailto:aryan.narwani@gmail.com" class="contact-link" data-anim="slide">
+            <div class="contact-link-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div class="contact-link-text">
+              <span class="contact-link-label">Email</span>
+              <span class="contact-link-value">aryan.narwani@gmail.com</span>
+            </div>
+          </a>
+          <a href="#" class="contact-link" data-anim="slide" target="_blank">
+            <div class="contact-link-icon"><svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></div>
+            <div class="contact-link-text">
+              <span class="contact-link-label">LinkedIn</span>
+              <span class="contact-link-value">linkedin.com/in/aryannarwani</span>
+            </div>
+          </a>
+          <a href="#" class="contact-link" data-anim="slide" target="_blank">
+            <div class="contact-link-icon"><svg viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></div>
+            <div class="contact-link-text">
+              <span class="contact-link-label">GitHub</span>
+              <span class="contact-link-value">github.com/aryannarwani</span>
+            </div>
+          </a>
+          <a href="#" class="contact-link" data-anim="slide">
+            <div class="contact-link-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+            <div class="contact-link-text">
+              <span class="contact-link-label">Resume</span>
+              <span class="contact-link-value">Download CV (PDF)</span>
+            </div>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-right">
+        <div class="form-row" data-anim="fade">
+          <div class="form-group">
+            <label>Name</label>
+            <input type="text" placeholder="Your name"/>
+          </div>
+          <div class="form-group">
+            <label>Email</label>
+            <input type="email" placeholder="your@email.com"/>
+          </div>
+        </div>
+        <div class="form-group" data-anim="fade">
+          <label>Subject</label>
+          <input type="text" placeholder="What's this about?"/>
+        </div>
+        <div class="form-group" data-anim="fade">
+          <label>Message</label>
+          <textarea rows="6" placeholder="Tell me what you're working on..."></textarea>
+        </div>
+        <button class="btn-submit" data-anim="fade"><span>Send message →</span></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <span class="footer-left">Aryan Haresh Narwani Daswani · Madrid, Spain</span>
+  <span class="footer-center">
+    <span class="footer-dot"></span>
+    AN
+  </span>
+  <span class="footer-right">© 2026 · Built with precision</span>
+</footer>
+
+<!-- SCRIPTS -->
+<script type="module" src="js/main.js"></script>
+
+</body>
+</html>

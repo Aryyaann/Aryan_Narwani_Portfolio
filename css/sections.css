@@ -1,0 +1,46 @@
+/* ═══════════════════════════════════════════════════════════════════
+   GENERIC SECTION
+═══════════════════════════════════════════════════════════════════ */
+section{position:relative;padding:8rem 3rem;}
+.section-inner{max-width:1500px;margin:0 auto;}
+
+.section-label{
+  font-size:.7rem;letter-spacing:.45em;text-transform:uppercase;
+  color:var(--accent);font-family:var(--font-m);margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.85rem;
+}
+.section-label::before{content:'';width:2rem;height:1px;background:var(--accent);}
+
+.section-title{
+  font-size:clamp(3rem,7vw,8rem);font-weight:800;
+  letter-spacing:-.045em;line-height:.92;margin-bottom:3rem;
+}
+.section-title em{
+  font-family:var(--font-s);font-style:italic;font-weight:400;
+  color:var(--accent);letter-spacing:-.02em;
+}
+.section-title .outline{
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.2);
+}
+
+/* Reveal helpers (used by GSAP) */
+.split-line{display:inline-block;overflow:hidden;vertical-align:bottom;}
+.split-line>span{display:inline-block;}
+
+/* ═══════════════════════════════════════════════════════════════════
+   MARQUEE
+═══════════════════════════════════════════════════════════════════ */
+.marquee-container{
+  width:100%;overflow:hidden;
+  border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:1.1rem 0;background:var(--bg-2);
+}
+.marquee-track{display:flex;gap:3.5rem;white-space:nowrap;will-change:transform;}
+.marquee-item{
+  font-size:.75rem;letter-spacing:.3em;text-transform:uppercase;
+  color:var(--gray-200);font-family:var(--font-m);
+  display:inline-flex;align-items:center;gap:2rem;
+}
+.marquee-item::after{
+  content:'';width:6px;height:6px;border-radius:50%;background:var(--accent);
+}

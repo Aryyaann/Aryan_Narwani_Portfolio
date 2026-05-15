@@ -1,0 +1,52 @@
+/* ═══════════════════════════════════════════════════════════════════
+   FOCUS / VALUE PROP
+═══════════════════════════════════════════════════════════════════ */
+#focus{background:var(--bg);overflow:hidden;}
+.focus-bg-text{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  font-size:clamp(8rem,20vw,24rem);font-weight:800;
+  color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.025);
+  white-space:nowrap;pointer-events:none;user-select:none;
+  letter-spacing:-.05em;font-family:var(--font-d);
+}
+.focus-grid{
+  display:grid;grid-template-columns:1fr 1.1fr;gap:5rem;
+  align-items:start;position:relative;z-index:1;
+}
+.focus-left h2{
+  font-size:clamp(2.8rem,5.5vw,5.5rem);font-weight:800;
+  letter-spacing:-.045em;line-height:.95;margin-bottom:2rem;
+}
+.focus-left h2 em{
+  display:block;font-family:var(--font-s);font-style:italic;
+  font-weight:400;color:var(--accent);
+}
+.focus-left p{
+  font-size:.95rem;color:var(--gray-100);font-family:var(--font-m);
+  line-height:1.85;max-width:42ch;
+}
+.focus-areas{display:flex;flex-direction:column;gap:.6rem;}
+.focus-area{
+  border:1px solid var(--line);padding:1.4rem 1.6rem;
+  display:flex;align-items:center;justify-content:space-between;gap:1rem;
+  transition:all .35s;cursor:default;background:var(--bg-2);
+  position:relative;overflow:hidden;
+}
+.focus-area::before{
+  content:'';position:absolute;left:0;top:0;bottom:0;width:2px;
+  background:var(--accent);transform:scaleY(0);transform-origin:top;
+  transition:transform .35s;
+}
+.focus-area:hover{border-color:var(--line-2);background:var(--bg-3);}
+.focus-area:hover::before{transform:scaleY(1);}
+.focus-area-info{display:flex;flex-direction:column;gap:.25rem;}
+.focus-area-name{font-size:1.05rem;font-weight:600;letter-spacing:-.01em;}
+.focus-area-desc{
+  font-size:.7rem;font-family:var(--font-m);color:var(--gray-300);
+  letter-spacing:.05em;
+}
+.focus-area-arrow{
+  width:20px;height:20px;stroke:var(--accent);fill:none;stroke-width:2;
+  transition:transform .35s;opacity:0;
+}
+.focus-area:hover .focus-area-arrow{opacity:1;transform:translateX(6px);}

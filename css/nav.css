@@ -1,0 +1,60 @@
+/* ═══════════════════════════════════════════════════════════════════
+   NAVIGATION — Code bracket signature
+═══════════════════════════════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  padding:1.4rem 3rem;
+  display:flex;justify-content:space-between;align-items:center;
+  mix-blend-mode:difference;
+  transition:transform .5s cubic-bezier(.65,0,.35,1);
+}
+.nav-logo{
+  display:inline-flex;align-items:center;
+  font-family:var(--font-m);font-size:.95rem;font-weight:500;
+  letter-spacing:.05em;color:var(--white);gap:0;
+  text-decoration:none;
+}
+.nav-logo-bracket{
+  color:var(--accent);font-weight:300;font-size:1.1rem;
+  transition:letter-spacing .3s;
+}
+.nav-logo:hover .nav-logo-bracket{ letter-spacing:.08em; }
+.nav-logo-slash{
+  color:var(--gray-300);font-weight:300;margin:0 .05em;
+}
+.nav-logo-name{
+  color:var(--white);font-weight:700;letter-spacing:.02em;
+  position:relative;
+}
+/* Blinking cursor after the name */
+.nav-logo-cursor{
+  display:inline-block;width:2px;height:.9em;
+  background:var(--accent);margin-left:2px;
+  vertical-align:middle;
+  animation:blink .9s step-end infinite;
+}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+
+/* Underline scan on hover */
+.nav-logo::after{
+  content:'';position:absolute;bottom:-2px;left:0;right:0;
+  height:1px;background:var(--accent);
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .4s cubic-bezier(.65,0,.35,1);
+}
+.nav-logo:hover::after{ transform:scaleX(1); }
+
+.nav-links{display:flex;gap:2.5rem;}
+.nav-links a{
+  font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;
+  font-weight:500;color:var(--white);opacity:.55;
+  transition:opacity .3s;font-family:var(--font-m);
+}
+.nav-links a:hover{opacity:1;}
+.nav-cta{
+  font-size:.7rem;letter-spacing:.25em;text-transform:uppercase;
+  font-weight:600;border:1px solid rgba(255,255,255,.3);
+  padding:.55rem 1.25rem;color:var(--white);
+  transition:all .3s;font-family:var(--font-m);
+}
+.nav-cta:hover{background:var(--white);color:#000;border-color:var(--white);}

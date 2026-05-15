@@ -1,0 +1,62 @@
+/* ═══════════════════════════════════════════════════════════════════
+   PRELOADER
+═══════════════════════════════════════════════════════════════════ */
+#preloader{
+  position:fixed;inset:0;background:var(--black);z-index:10000;
+  display:flex;align-items:center;justify-content:center;
+}
+.preloader-text{
+  font-family:var(--font-m);font-size:.75rem;letter-spacing:.4em;
+  text-transform:uppercase;color:var(--gray-200);overflow:hidden;
+  display:flex;align-items:center;gap:1rem;
+}
+.preloader-count{color:var(--accent);min-width:3rem;text-align:right;}
+.preloader-bar{
+  position:fixed;bottom:0;left:0;height:1px;width:0%;
+  background:var(--accent);z-index:10001;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SECTION TRANSITION — Big title zoom-into-position
+═══════════════════════════════════════════════════════════════════ */
+#section-overlay{
+  position:fixed;inset:0;z-index:8000;pointer-events:none;
+  background:var(--black);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;visibility:hidden;
+  overflow:hidden;
+}
+/* Accent sweep line that crosses the overlay */
+#section-overlay-line{
+  position:absolute;left:0;right:0;top:50%;height:1px;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;
+  opacity:.5;
+}
+#section-overlay-label{
+  position:absolute;bottom:3rem;left:3rem;
+  font-family:var(--font-m);font-size:.65rem;letter-spacing:.4em;
+  text-transform:uppercase;color:var(--accent);opacity:0;
+}
+#section-overlay-title{
+  font-family:var(--font-d);font-weight:800;
+  font-size:clamp(5rem,15vw,18rem);
+  letter-spacing:-.05em;line-height:.9;
+  color:var(--white);text-align:center;
+  white-space:nowrap;
+  opacity:0;transform:scale(1.15);
+  /* Outline version for ghost look */
+  -webkit-text-stroke:1px rgba(255,255,255,.15);
+  color:transparent; -webkit-text-stroke:1px rgba(0,212,255,.5);
+}
+#section-overlay-title.solid{
+  color:var(--white);
+  -webkit-text-stroke:0;
+}
+#section-overlay-counter{
+  position:absolute;top:3rem;right:3rem;
+  font-family:var(--font-m);font-size:.65rem;letter-spacing:.3em;
+  color:var(--gray-300);opacity:0;
+}
+
+/* ─── Keep old curtain-layer for any fallback refs ─── */
+.curtain-layer,.curtain-logo{display:none;}
