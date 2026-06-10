@@ -2,17 +2,47 @@
    CONTACT — Form handler + smooth anchor scroll
 ═══════════════════════════════════════════════════════════════════ */
 export function initContact(lenis) {
-  /* ─── Form submit ─── */
-  const submitBtn = document.querySelector('.btn-submit');
-  if (submitBtn) {
-    submitBtn.addEventListener('click', e => {
+  /* ─── Form submit via Formspree ─── */
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
       e.preventDefault();
-      submitBtn.querySelector('span').textContent = 'Message sent ✓';
-      submitBtn.style.pointerEvents = 'none';
-      setTimeout(() => {
-        submitBtn.querySelector('span').textContent = 'Send message →';
-        submitBtn.style.pointerEvents = '';
-      }, 3000);
+      const btn = form.querySelector('button[type="submit"] span');
+      btn.textContent = 'Sending...';
+
+      try {
+        const res = await fetch('https://formspree.io/f/meewzbpo', {
+          method: 'POST',
+          headers: { 'Accept': 'application/json' },
+          body: new FormData(form)
+        });
+
+        if (res.ok) {
+          btn.textContent = 'Sent ✓';
+          form.reset();
+          if (status) {
+            status.style.display = 'block';
+            status.style.color = '#00ffb3';
+            status.textContent = "Message received. I'll get back to you soon.";
+          }
+        } else {
+          btn.textContent = 'Send message →';
+          if (status) {
+            status.style.display = 'block';
+            status.style.color = '#ff4d4d';
+            status.textContent = 'Something went wrong. Try again or email directly.';
+          }
+        }
+      } catch (err) {
+        btn.textContent = 'Send message →';
+        if (status) {
+          status.style.display = 'block';
+          status.style.color = '#ff4d4d';
+          status.textContent = 'Something went wrong. Try again or email directly.';
+        }
+      }
     });
   }
 
