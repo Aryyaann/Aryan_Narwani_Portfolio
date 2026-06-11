@@ -4,7 +4,7 @@
 
 const SUPABASE_URL = 'https://qyuaekusrzttoueebpsn.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InF5dWFla3Vzcnp0dG91ZWVicHNuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNjkwODksImV4cCI6MjA5Njc0NTA4OX0.62UWR5cDoPTIPm41fBucrRQozazYuXX1_tQKYF7hhQQ';
-const FORMSPREE_ID = 'Tmeewzbpo';
+const FORMSPREE_ID = 'meewzbpo';
 
 export function initContact(lenis) {
   /* ─── Form submit ─── */
