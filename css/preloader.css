@@ -45,8 +45,8 @@
   white-space:nowrap;
   opacity:0;transform:scale(1.15);
   /* Outline version for ghost look */
-  -webkit-text-stroke:1px rgba(255,255,255,.15);
-  color:transparent; -webkit-text-stroke:1px rgba(0,212,255,.5);
+  -webkit-text-stroke:3px rgba(255,255,255,.15);
+  color:transparent; -webkit-text-stroke:3px rgba(0,212,255,.5);
 }
 #section-overlay-title.solid{
   color:var(--white);

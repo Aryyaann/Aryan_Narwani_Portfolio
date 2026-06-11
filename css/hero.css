@@ -117,9 +117,16 @@
 .hero-meta-val{font-size:.85rem;font-weight:500;color:var(--white);}
 
 .hero-desc{
-  font-size:.95rem;color:var(--gray-100);line-height:1.7;
+  font-size:clamp(1.8rem,2.4vw,1.9rem);
+  font-family:var(--font-s);
+  font-style:italic;
+  line-height:1.7;
   max-width:46ch;
   text-shadow:0 0 20px rgba(0,0,0,.6);
+}
+
+.hero-desc em{
+  font-family:var(--font-s);font-style:italic;color:var(--accent);
 }
 
 .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;align-items:center;}

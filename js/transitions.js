@@ -5,9 +5,9 @@ const sectionMeta = {
   'about':      { label: '01 — About',      title: 'ABOUT',   counter: '01 / 06' },
   'skills':     { label: '02 — Stack',      title: 'STACK',   counter: '02 / 06' },
   'projects':   { label: '03 — Work',       title: 'WORK',    counter: '03 / 06' },
-  'experience': { label: '04 — Experience', title: 'JOURNEY', counter: '04 / 06' },
+  'experience': { label: '04 — Experience', title: 'JOURNEY', counter: '04 / 06', fontSize: 'clamp(3rem,9vw,11rem)' },
   'focus':      { label: '05 — Value',      title: 'BUILD',   counter: '05 / 06' },
-  'contact':    { label: '06 — Contact',    title: 'CONTACT', counter: '06 / 06' },
+  'contact':    { label: '06 — Contact',    title: 'CONTACT', counter: '06 / 06', fontSize: 'clamp(3rem,10vw,12rem)' },
 };
 
 function playTitleTransition(meta) {
@@ -24,6 +24,9 @@ function playTitleTransition(meta) {
   overlayTitle.textContent = meta.title;
   overlayLabel.textContent = meta.label;
   overlayCtr.textContent   = meta.counter;
+
+  /* Apply custom font size if defined, otherwise reset to CSS default */
+  overlayTitle.style.fontSize = meta.fontSize || '';
 
   gsap.set(overlay,      { visibility: 'visible', opacity: 0 });
   gsap.set(overlayTitle, { y: '60%', opacity: 0, scale: 1, x: 0 });
