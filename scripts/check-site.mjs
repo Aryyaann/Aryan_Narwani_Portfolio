@@ -70,6 +70,14 @@ export function checkReferences(root) {
   return problems;
 }
 
+/* The company's name is Nara Intelligences; Nara Intelligence is the old one (vault,
+   knowledge base 0001–0002, 0036), and the page carried it until M4. */
+export function checkCopy(root) {
+  const html = readFileSync(join(root, 'index.html'), 'utf8');
+  const old = html.match(/Nara Intelligence(?!s)/g)?.length ?? 0;
+  return old ? [`index.html says "Nara Intelligence" ${old} time(s); the name is "Nara Intelligences"`] : [];
+}
+
 /* Attribute values in double or single quotes (HTML allows both). */
 function attributes(html, names) {
   return [...html.matchAll(new RegExp(`\\b(?:${names})=(["'])(.*?)\\1`, 'g'))].map(m => m[2]);
@@ -100,6 +108,15 @@ async function checkInBrowser(browser, url, viewport, screenshotDir) {
       const el = document.getElementById('preloader');
       return !el || getComputedStyle(el).display === 'none' || getComputedStyle(el).opacity === '0';
     }, null, { timeout: 10_000 }).catch(() => say('the preloader never went away'));
+
+    /* js/hero.js hides the name and reveals it behind a cyan mask about 2.5 s after the
+       preloader; measuring or photographing before then sees a half-drawn hero. */
+    await page.waitForFunction(() => {
+      const rows = [...document.querySelectorAll('.hero-name .row-inner')];
+      const masks = [...document.querySelectorAll('.hero-name .row-mask')];
+      return rows.length > 0 && rows.every(el => getComputedStyle(el).visibility === 'visible')
+        && masks.every(el => /^matrix\(0,/.test(getComputedStyle(el).transform));
+    }, null, { timeout: 10_000 }).catch(() => say('the hero name was never revealed'));
 
     await page.evaluate(async () => {
       const pause = ms => new Promise(r => setTimeout(r, ms));
@@ -135,6 +152,17 @@ async function checkInBrowser(browser, url, viewport, screenshotDir) {
         brokenImages,
         width: Math.max(document.documentElement.scrollWidth, document.body.scrollWidth),
         viewport: innerWidth,
+        /* Each name row hides its overflow (hero.css), and its box ends before the
+           viewport does, so a name too wide is cut, not scrollable: "Narwani." was
+           clipped at 390 px until M4. Visible box = the row, within the viewport. */
+        cutName: [...document.querySelectorAll('.hero-name .row-inner')].flatMap(el => {
+          const r = el.getBoundingClientRect();
+          const row = el.parentElement.getBoundingClientRect();
+          const left = Math.max(row.left, 0), right = Math.min(row.right, innerWidth);
+          return r.left < left || r.right > right
+            ? [`"${el.textContent.trim()}" spans ${Math.round(r.left)}–${Math.round(r.right)}px, visible ${Math.round(left)}–${Math.round(right)}px`]
+            : [];
+        }),
       };
     });
 
@@ -142,8 +170,12 @@ async function checkInBrowser(browser, url, viewport, screenshotDir) {
     if (missing.length) say(`missing sections: ${missing.join(', ')}`);
     for (const src of found.brokenImages) say(`image does not decode: ${src}`);
     if (found.width > found.viewport) say(`page is ${found.width}px wide in a ${found.viewport}px viewport (horizontal scroll)`);
+    for (const name of found.cutName) say(`hero name is cut: ${name}`);
 
-    if (screenshotDir) await page.screenshot({ path: join(screenshotDir, `${viewport.name}.png`) });
+    if (screenshotDir) {
+      await page.waitForTimeout(1500); /* the lines under the name finish fading in */
+      await page.screenshot({ path: join(screenshotDir, `${viewport.name}.png`) });
+    }
   } catch (e) {
     say(`page did not load: ${e.message}`);
   } finally {
@@ -153,7 +185,7 @@ async function checkInBrowser(browser, url, viewport, screenshotDir) {
 }
 
 export async function checkSite(root, { browser, viewports = VIEWPORTS, screenshotDir } = {}) {
-  const problems = checkReferences(root);
+  const problems = [...checkReferences(root), ...checkCopy(root)];
   const server = await serve(root);
   const ownBrowser = !browser;
   browser ??= await chromium.launch();

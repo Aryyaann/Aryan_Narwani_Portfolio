@@ -12,7 +12,7 @@ Aryan, recorded in the vault.
 | M1 | The site, live in production | verified | 4/4 |
 | M2 | Verification gate and deploy pipeline | verified | 3/3 |
 | M3 | Contact form proven end to end | active | 3/4 |
-| M4 | Brand name and phone layout fixed | pending | 0/2 |
+| M4 | Brand name and phone layout fixed | verified | 2/2 |
 
 ## M1 — The site, live in production · verified
 
@@ -50,12 +50,15 @@ Recorded in `docs/qa/M2-verify.md` and `docs/qa/M2-codex.md`.
 | A failed save does not stop the email | Gate tests with stand-ins for Supabase and Formspree (nothing really sent): Supabase unreachable or refusing (401), the email still goes to `/f/meewzbpo` with the four fields and the success message shows | **Done** — `tests/contact-form.test.mjs`, each test seen failing against a broken `contact.js` (`docs/qa/M3-review.md`) |
 | The email reaches Aryan | One real submission, approved by him, arrives in his inbox | **Unverified** — no Formspree email in Aryan's personal Gmail since 2026-10-05; the receiving inbox is unknown (owner action #1) |
 
-## M4 — Brand name and phone layout fixed · pending
+## M4 — Brand name and phone layout fixed · verified
 
-| Criterion | Check |
-|---|---|
-| The site says *Nara Intelligences* everywhere (today *Nara Intelligence*, 7 times: meta and Open Graph descriptions, hero, status line, about, experience) | `grep` finds no "Nara Intelligence" without the *s*; the gate passes |
-| The name in the hero is not cut at phone width (today "Narwani" is clipped on the right at 390 px) | A gate check that the hero name's box fits the viewport at 390 px, seen failing on today's page first |
+| Criterion | Check | Evidence |
+|---|---|---|
+| The site says *Nara Intelligences* everywhere (it said *Nara Intelligence* 7 times: meta and Open Graph descriptions, hero, status line, about, experience) | Gate: `index.html` holds no "Nara Intelligence" without the *s* | Check seen failing on the old page (7), passing after the rename; live after the push |
+| The name in the hero is not cut at phone width ("Narwani." was clipped at 390 px) | Gate: each name row fits the row that clips it, within the viewport, at 390 px | Seen failing on the old page (24–402 px); passing after; a sweep from 280 to 1024 px shows no cut |
+
+Recorded in `docs/qa/M4-review.md`. The CV (`assets/AryanNarwaniCV2026.pdf`) does not
+mention Nara, so it needed no rename.
 
 ## Not in this plan, for Aryan to decide
 
@@ -64,4 +67,6 @@ Recorded in `docs/qa/M2-verify.md` and `docs/qa/M2-codex.md`.
   Recommendation: switch Pages off and point the homepage to `aryannarwani.com`.
 - **`www.aryannarwani.com`** has no DNS record, so it does not open.
 - **What the portfolio is for** (recruiters, Nara clients, both) and anything to add: a
-  note in the vault is what turns it into milestones.
+  note in the vault is what turns it into milestones. Related: the CV presents Aryan as an
+  AI & Data Engineer at Arbentia (Madrid, since 03/2026) and does not mention Nara; the site
+  presents him as founder of Nara Intelligences, based in Bangalore.
