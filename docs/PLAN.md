@@ -11,7 +11,7 @@ Aryan, recorded in the vault.
 |---|---|---|---|
 | M1 | The site, live in production | verified | 4/4 |
 | M2 | Verification gate and deploy pipeline | verified | 3/3 |
-| M3 | Contact form proven end to end | active | 2/4 |
+| M3 | Contact form proven end to end | active | 3/4 |
 | M4 | Brand name and phone layout fixed | pending | 0/2 |
 
 ## M1 — The site, live in production · verified
@@ -47,7 +47,7 @@ Recorded in `docs/qa/M2-verify.md` and `docs/qa/M2-codex.md`.
 |---|---|---|
 | A submission is saved to `portfolio_contacts` (Nara Dashboard Supabase) | Row in the table | **Done** — the test row of 2026-10-06 10:32 UTC, the minute of commit `50a07b8` |
 | Visitors can insert but not read | Policy list; `GET` with the publishable key | **Done** — only an `INSERT` policy for `anon`; `GET` answers 401 `42501` (2026-11-24) |
-| A failed save does not stop the email | Gate test: Supabase request aborted, Formspree intercepted (nothing really sent); the Formspree request is still made and the success message shows | To do |
+| A failed save does not stop the email | Gate tests with stand-ins for Supabase and Formspree (nothing really sent): Supabase unreachable or refusing (401), the email still goes to `/f/meewzbpo` with the four fields and the success message shows | **Done** — `tests/contact-form.test.mjs`, each test seen failing against a broken `contact.js` (`docs/qa/M3-review.md`) |
 | The email reaches Aryan | One real submission, approved by him, arrives in his inbox | **Unverified** — no Formspree email in Aryan's personal Gmail since 2026-10-05; the receiving inbox is unknown (owner action #1) |
 
 ## M4 — Brand name and phone layout fixed · pending

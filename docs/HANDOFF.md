@@ -1,16 +1,17 @@
 # Handoff
 
-**2026-11-24.** M1 verified against production (`docs/qa/M1-production-check.md`). M2
-verified: `npm run verify` exists and passes (11 tests), pushes still deploy to Vercel
-(`docs/qa/M2-verify.md`, `docs/qa/M2-codex.md`). The page itself has not changed since
+**2026-11-24.** M1 and M2 verified. M3 at 3/4: the contact form is tested against
+stand-ins (a failed or refused Supabase save still sends the email; nothing real is sent),
+`docs/qa/M3-review.md`. Its last step, the real email reaching Aryan, waits on owner
+action #1. `npm run verify`: 15 tests, passing. The page itself has not changed since
 2026-10-06.
 
 ## Next
 
-1. M3: a gate test that a failed Supabase save still sends the email (Supabase aborted,
-   Formspree intercepted, nothing really sent); then owner action #1 for the real email.
-2. M4: *Nara Intelligences* everywhere; the hero name fitting at 390 px (add the gate check
+1. M4: *Nara Intelligences* everywhere; the hero name fitting at 390 px (add the gate check
    first and see it fail on today's page).
+2. M3's last step when Aryan answers #1: one real submission with his OK, then mark M3
+   verified.
 
 ## Open questions for Aryan
 

@@ -1,6 +1,7 @@
 # M2 — The gate, 2026-11-24
 
-`npm run verify` = `node --test tests/*.test.mjs && node scripts/verify.mjs`. It needs the
+`npm run verify` = `node --test tests/*.test.mjs && node scripts/verify.mjs`. Since M3 it also
+runs `tests/contact-form.test.mjs` (`docs/qa/M3-review.md`). It needs the
 network (the page loads GSAP, Lenis, Swiper and fonts from CDNs) and Playwright's Chromium
 (`npx playwright install chromium` once on a new machine).
 
