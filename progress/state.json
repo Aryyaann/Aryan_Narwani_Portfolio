@@ -1,6 +1,6 @@
 {
   "status": "waiting",
-  "now": "M4 verified; only M3's real email test is left, waiting on Aryan",
+  "now": "Real test message sent (Supabase and Formspree accepted it); waiting for Aryan to confirm it arrived",
   "milestones": [
     { "id": "M1", "title": "The site, live in production", "status": "verified", "done": 4, "total": 4 },
     { "id": "M2", "title": "Verification gate and deploy pipeline", "status": "verified", "done": 3, "total": 3 },
@@ -8,8 +8,8 @@
     { "id": "M4", "title": "Brand name and phone layout fixed", "status": "verified", "done": 2, "total": 2 }
   ],
   "waitingOn": [
-    "Say which inbox receives the contact form's emails and allow one real test submission (OWNER_ACTIONS #1)"
+    "Check that the test email from the contact form arrived (OWNER_ACTIONS #1)"
   ],
   "lastVerify": { "at": "2026-11-24T13:04:59Z", "passed": true, "tests": 19 },
-  "updatedAt": "2026-11-24T13:07:00Z"
+  "updatedAt": "2026-11-24T13:20:00Z"
 }
