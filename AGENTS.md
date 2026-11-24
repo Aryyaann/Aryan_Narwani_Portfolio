@@ -7,7 +7,7 @@ template (`nara-hub/templates/project/AGENTS.md`) adapted to this repository.
 ## This repository
 
 Aryan's personal portfolio: one static page (`index.html`, `css/`, `js/` as ES modules,
-`assets/`), no build step and no `package.json` yet. GSAP, ScrollTrigger, Lenis and Swiper
+`assets/`), no build step. `package.json` exists only for the gate (Playwright). GSAP, ScrollTrigger, Lenis and Swiper
 come from jsDelivr at pinned versions; fonts from Google Fonts. The contact form saves to
 the `portfolio_contacts` table of the Nara Dashboard Supabase project (publishable key,
 insert-only for `anon`) and sends the email through Formspree.
@@ -24,7 +24,7 @@ passing test, a recorded run, a reviewed document) — never because the code wa
 ## The loop, per milestone
 
 1. Implement. Parallel subagents only when their file sets do not overlap.
-2. Static checks: once the gate exists (M2), whatever it runs.
+2. Static checks: the reference check inside the gate.
 3. Tests for what can break: the page loading without errors at desktop and phone width,
    every referenced file resolving, and the contact form where input crosses a trust
    boundary.
@@ -53,11 +53,13 @@ passing test, a recorded run, a reviewed document) — never because the code wa
 
 ## The gate: `npm run verify`
 
-Does not exist yet; milestone M2 builds it. For this static site it serves the folder
-locally and loads the page in headless Chromium at desktop and phone width, failing on any
-JavaScript error, failed request, broken image, missing section or horizontal scroll, and
-checks that every file `index.html` references exists. Until then, record each manual check
-and its output in `docs/qa/`.
+Runs the gate's own tests (each provokes one breakage on a copy of the site and expects
+the gate to name it), then checks this folder: every referenced file exists, every in-page
+link has its target, and in headless Chromium at 1440 and 390 px there is no JavaScript
+error, failed request, undecodable image, missing section or horizontal scroll. Details in
+`docs/qa/M2-verify.md`. It needs the network (CDN scripts and fonts) and, on a new machine,
+`npx playwright install chromium`. A new check is added with a test that breaks a copy and
+sees it fail first.
 
 Write the output to a log and check the exit code — **never pipe it through `grep`**, which
 swallows the failure.
@@ -107,7 +109,7 @@ Keep it true; it is the single source for "where is this":
 ```
 
 `waiting` means blocked on Aryan. A milestone is `verified` only under the rules above.
-`lastVerify` stays `null` until `npm run verify` exists.
+`lastVerify` is the last `npm run verify` run; `tests` counts the gate's own tests.
 
 ## Documents that stay current
 
@@ -143,7 +145,9 @@ keeps the old text. Numbers are never reused: a line under the intro says the ne
 
 ## Deploying
 
-A push to `main` deploys through Vercel's Git integration (the last production deploy,
-2026-10-06, came from commit `e9b92c8`). Whether that link survived the repository's move to
-NaraIntelligences and back to `Aryyaann` on 2026-11-23/24 is checked in M2. Do not assume a
-push deployed: compare `https://aryannarwani.com/` with `index.html` at `HEAD`.
+A push to `main` deploys through Vercel's Git integration (proven again on 2026-11-24
+after the repository's move to NaraIntelligences and back). `.vercelignore` keeps plans,
+tests and tooling off the live site; a new top-level file that is not part of the page goes
+there too. Do not assume a push deployed: check its Vercel status
+(`gh api repos/Aryyaann/Aryan_Narwani_Portfolio/commits/<sha>/status`) and compare
+`https://aryannarwani.com/` with `index.html` at `HEAD`.

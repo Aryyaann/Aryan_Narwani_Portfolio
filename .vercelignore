@@ -1,0 +1,12 @@
+# Only the site is deployed; plans, tests and tooling stay in the repository.
+AGENTS.md
+CLAUDE.md
+OWNER_ACTIONS.md
+docs
+progress
+scripts
+tests
+package.json
+package-lock.json
+.verify
+agentsimg

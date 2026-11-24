@@ -44,5 +44,5 @@ Seen in the 390 px screenshot: the outlined "Narwani" in the hero is clipped on 
 - Policies: one, `Public can submit the contact form`, `INSERT` for `anon`.
 - `GET /rest/v1/portfolio_contacts` with the publishable key: HTTP 401, `42501 permission
   denied` — visitors cannot read submissions.
-- Formspree delivery: no message from `formspree.io` in `aryannarwani04@gmail.com` since
+- Formspree delivery: no message from `formspree.io` in Aryan's personal Gmail since
   2026-10-05. Unverified.
